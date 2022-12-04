@@ -1,22 +1,16 @@
-#![feature(binary_heap_into_iter_sorted)]
-
 mod input_processor;
 use input_processor::InputType;
 
-use std::collections::BinaryHeap;
 use std::time::Instant;
 
 type OutputType = u32;
 
 fn part1(input: &InputType) -> OutputType {
-    *input.iter().max().unwrap()
+    0
 }
 
 fn part2(input: &InputType) -> OutputType {
-    BinaryHeap::from(input.clone())
-        .into_iter_sorted()
-        .take(3)
-        .sum()
+    0
 }
 
 fn main() {
@@ -32,12 +26,12 @@ mod tests {
     #[test]
     fn part1_test() {
         let input = input_processor::get_input("input-test.txt");
-        assert_eq!(part1(&input), 24000);
+        assert_eq!(part1(&input), 157);
     }
 
-    #[test]
-    fn part2_test() {
-        let input = input_processor::get_input("input-test.txt");
-        assert_eq!(part2(&input), 45000);
-    }
+    // #[test]
+    // fn part2_test() {
+    //     let input = input_processor::get_input("input-test.txt");
+    //     assert_eq!(part2(&input), 70);
+    // }
 }

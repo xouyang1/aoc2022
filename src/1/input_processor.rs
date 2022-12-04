@@ -4,11 +4,13 @@ use std::fmt::Debug;
 use std::iter::Sum;
 use std::str::FromStr;
 
-pub fn get_input(file: &str) -> Vec<i32> {
+type InputElementType = u32;
+pub type InputType = Vec<InputElementType>;
+
+pub fn get_input(file: &str) -> InputType {
     let raw = input_parser::read_file_to_string(file!(), file);
-    input_parser::group_lines(&raw)
-        .iter()
-        .map(|&group| process_input_group::<i32>(group))
+    input_parser::group_lines_iter(&raw)
+        .map(|group| process_input_group::<InputElementType>(group))
         .collect()
 }
 

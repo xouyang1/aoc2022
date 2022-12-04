@@ -41,6 +41,7 @@ fn part2(input: &InputType) -> u32 {
             let mut sets = group.map(|rucksack| rucksack.chars().collect::<HashSet<char>>());
             let mut intersection = sets.next().unwrap();
             let sets: Vec<HashSet<char>> = sets.collect();
+            // in-place processing instead of std::collections::hash_set::Intersection
             intersection.retain(|c| sets.iter().all(|s| s.contains(c)));
             if intersection.len() > 1 {
                 panic!("Multiple matching values {:?}", intersection);

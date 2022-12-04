@@ -19,10 +19,8 @@ pub fn read_file_to_struct<T: serde::de::DeserializeOwned>(
         .collect()
 }
 
-pub fn group_lines(raw: &str) -> Vec<&str> {
-    raw.split("\n\n")
-        .filter(|&x| !x.trim().is_empty())
-        .collect()
+pub fn group_lines_iter(raw: &str) -> impl Iterator<Item = &str> {
+    raw.split("\n\n").filter(|&x| !x.trim().is_empty())
 }
 
 pub fn str_split_half(s: &str) -> (&str, &str) {

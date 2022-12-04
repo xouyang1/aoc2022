@@ -39,7 +39,7 @@ impl From<&str> for Shape {
             "A" | "X" => Shape::Rock,
             "B" | "Y" => Shape::Paper,
             "C" | "Z" => Shape::Scissors,
-            &_ => Shape::Scissors,
+            &_ => panic!("Unrecognized shape."),
         }
     }
 }
@@ -50,11 +50,11 @@ pub enum RoundOutcome {
     Win = 6,
 }
 
+// mem::variant_count::<Shape> unstable (https://github.com/rust-lang/rust/issues/73662) so hardcoding to 3 for now
 pub type InputSubType = [i32; 3];
 pub type InputType = [InputSubType; 3];
 
 pub fn get_input(file: &str) -> InputType {
-    // mem::variant_count::<Shape> unstable (https://github.com/rust-lang/rust/issues/73662) so hardcoding to 3 for now
     let mut input = InputType::default();
     input_parser::read_file_to_struct::<Round>(file!(), file)
         .iter()
