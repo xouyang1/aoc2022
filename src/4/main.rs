@@ -8,7 +8,7 @@ use itertools::Itertools;
 type InputElementType = u32;
 type OutputType = u32;
 type Assignment = std::ops::Range<InputElementType>;
-type PairAssignments = Vec<Assignment>;
+type PairAssignments = (Assignment, Assignment);
 
 fn count_if<F>(input: &InputType, keep: F) -> usize
 where
@@ -22,7 +22,8 @@ where
                 .map(|i| i.parse().unwrap())
                 .tuples::<(InputElementType, InputElementType)>()
                 .map(|tup| tup.0..tup.1)
-                .collect();
+                .collect_tuple::<(Assignment, Assignment)>()
+                .unwrap();
             keep(&pair)
         })
         .count()
@@ -30,14 +31,15 @@ where
 
 fn part1(input: &InputType) -> OutputType {
     let keep_subset_pair = |pair: &PairAssignments| -> bool {
-        (pair[0].start as i32 - pair[1].start as i32) * (pair[1].end as i32 - pair[0].end as i32) >= 0
+        (pair.0.start as i32 - pair.1.start as i32) * (pair.1.end as i32 - pair.0.end as i32) >= 0
     };
     count_if(input, keep_subset_pair) as OutputType
 }
 
 fn part2(input: &InputType) -> OutputType {
-    let keep_overlapping_pair =
-        |pair: &PairAssignments| -> bool { !(pair[0].end < pair[1].start || pair[1].end < pair[0].start) };
+    let keep_overlapping_pair = |pair: &PairAssignments| -> bool {
+        !(pair.0.end < pair.1.start || pair.1.end < pair.0.start)
+    };
     count_if(input, keep_overlapping_pair) as OutputType
 }
 
