@@ -4,7 +4,7 @@ mod input_processor;
 use input_processor::InputType;
 
 use std::collections::BinaryHeap;
-use std::time::Instant;
+use std::time::{Duration, Instant};
 
 type OutputType = u32;
 
@@ -22,8 +22,11 @@ fn part2(input: &InputType) -> OutputType {
 fn main() {
     let start = Instant::now();
     let input = input_processor::get_input("input.txt");
-    println!("Part 1: {} in {:?}", part1(&input), start.elapsed());
-    println!("Part 2: {} in {:?}", part2(&input), start.elapsed());
+    let input_duration =
+        lib::display::print_results("Input Processing", "", Duration::new(0, 0), start);
+    let part1_duration =
+        lib::display::print_results("Part 1", part1(&input), input_duration, start);
+    lib::display::print_results("Part 2", part2(&input), part1_duration, start);
 }
 
 #[cfg(test)]
