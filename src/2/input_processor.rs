@@ -1,44 +1,33 @@
 use lib::input_parser;
 
-use std::fmt::Debug;
-
-use num_derive::FromPrimitive;
-use serde::{Deserialize, Deserializer};
-
-#[derive(Debug)]
 struct Round {
     you: Shape,
     me: i32,
 }
 
-impl<'de> Deserialize<'de> for Round {
-    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
-    where
-        D: Deserializer<'de>,
-    {
-        let s: &str = Deserialize::deserialize(deserializer).unwrap();
+impl std::str::FromStr for Round {
+    type Err = ();
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
         let mut parts = s.split(" ").fuse();
-        let you = parts.next().unwrap().into();
-        let me: Shape = parts.next().unwrap().into();
-        let me: i32 = me as i32;
-        Ok(Round { you, me })
+        let you = parts.next().unwrap().parse::<Shape>().unwrap();
+        let me = parts.next().unwrap().parse::<Shape>().unwrap() as i32;
+        Ok(Self { you, me })
     }
 }
 
-// FromPrimitive::from_i32
-#[derive(Clone, Copy, Debug, FromPrimitive, Hash, PartialEq, Eq, PartialOrd)]
 pub enum Shape {
     Rock = 0,
     Paper = 1,
     Scissors = 2,
 }
 
-impl From<&str> for Shape {
-    fn from(item: &str) -> Self {
-        match item {
-            "A" | "X" => Shape::Rock,
-            "B" | "Y" => Shape::Paper,
-            "C" | "Z" => Shape::Scissors,
+impl std::str::FromStr for Shape {
+    type Err = ();
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        match s {
+            "A" | "X" => Ok(Shape::Rock),
+            "B" | "Y" => Ok(Shape::Paper),
+            "C" | "Z" => Ok(Shape::Scissors),
             &_ => panic!("Unrecognized shape."),
         }
     }
@@ -56,8 +45,8 @@ pub type InputType = [InputSubType; 3];
 
 pub fn get_input(file: &str) -> InputType {
     let mut input = InputType::default();
-    input_parser::read_file_to_struct::<Round>(file!(), file)
-        .iter()
+    let raw = input_parser::read_file_to_string(file!(), file);
+    input_parser::read_str_to_struct_iter::<Round>(&raw)
         .for_each(|round| input[round.me as usize][round.you as usize] += 1);
     input
 }

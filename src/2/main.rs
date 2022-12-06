@@ -22,7 +22,7 @@ const OUTCOMES: InputType = [
 ];
 
 // 2d array with rows representing RoundOutcome::L/D/W and cols representing Shape::R/P/S
-const SHAPES_FOR_OUTCOME: InputType = [[3, 1, 2], [1, 2, 3], [2, 3, 1]]; // or generate with v = (j + i + n - 1) % n + 1
+const SHAPE_POINTS_FOR_OUTCOME: InputType = [[3, 1, 2], [1, 2, 3], [2, 3, 1]]; // or generate with v = (j + i + n - 1) % n + 1
 
 fn get_subtotals_iter(input: &InputType) -> impl Iterator<Item = i32> + '_ {
     input.into_iter().map(|&row| row.into_iter().sum::<i32>())
@@ -31,9 +31,8 @@ fn get_subtotals_iter(input: &InputType) -> impl Iterator<Item = i32> + '_ {
 fn part1(input: &InputType) -> i32 {
     let points_outcomes: i32 = lib::math::dot_product_2d(input.into_iter(), OUTCOMES.iter());
     let points_shape: InputSubType = core::array::from_fn(|i| i as i32 + 1);
-    let subtotals_iter = input.iter().map(|row| row.iter().sum::<i32>());
     let points_shapes: i32 =
-        lib::math::dot_product_1d_move_borrow(subtotals_iter, points_shape.iter());
+        lib::math::dot_product_1d_move_borrow(get_subtotals_iter(input), points_shape.iter());
     points_outcomes + points_shapes
 }
 
@@ -45,7 +44,7 @@ fn part2(input: &InputType) -> i32 {
     ];
     let points_outcomes =
         lib::math::dot_product_1d_move_borrow(get_subtotals_iter(input), POINTS_OUTCOME.iter());
-    let points_shapes = lib::math::dot_product_2d(input.iter(), SHAPES_FOR_OUTCOME.iter());
+    let points_shapes = lib::math::dot_product_2d(input.iter(), SHAPE_POINTS_FOR_OUTCOME.iter());
     points_outcomes + points_shapes
 }
 
