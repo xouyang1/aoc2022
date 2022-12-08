@@ -92,8 +92,8 @@ impl FileSystem {
                 }
             },
             Action::ListDir => (),
-            Action::UpdateSize (size) => dirs[*current].total_size += size,
-            Action::AddSubdir (name) => {
+            Action::UpdateSize(size) => dirs[*current].total_size += size,
+            Action::AddSubdir(name) => {
                 dirs.push(Dir {
                     name: name.clone(),
                     total_size: 0,

@@ -12,4 +12,5 @@ https://adventofcode.com/2022
 | 4 | <1ms | 2ms |  2ms | | Data Structures: tuple, `std::ops::Range`, <br/> Closures: as function parameter, <br/> Iterators: `itertools::tuple_impl::Tuples`|
 | 5 | <1ms | 700ms |  700ms | | Data ETL: `regex::{Captures, Regex}`, <br/> Data Structures: `std::vec::Vec` as stack, <br/> Traits: `std::str::FromStr`, impl Trait parameter, pointer to trait on heap with `dyn` and `std::boxed::Box` <br/> Iterators: `std::iter::{Enumerate, FilterMap, Rev}`, `std::slice::IterMut`, `std::str::SplitWhiteSpace`, <br/> Lifetime and Bounds |
 | 6 | <1ms | 1ms |  2ms | Sliding Window | Data Structures: `std::collections::{HashMap, hash_map::Entry}`, <br/> Iterators: `std::iter::Inspect`, `std::str::CharIndices` |
-| 7 | 2ms | <1ms |  2ms | Tree | enum with tuple/structs and match with destructuring
+| 7 | 2ms | <1ms |  2ms | Tree | enum with tuple/structs and match with destructuring |
+| 8 | 1ms | 5ms |  15ms | DP | |
