@@ -29,7 +29,7 @@ fn part1(input: &InputType) -> i32 {
 
 fn part2(input: &InputType) -> String {
     let mut states_iter = input.iter();
-    
+
     let initial = CycleState::initial();
     let mut state_next = &initial;
     let mut val_current = initial.value;
@@ -45,7 +45,7 @@ fn part2(input: &InputType) -> String {
             '.'
         }
     };
-    (1..=WIDTH*HEIGHT)
+    (1..=WIDTH * HEIGHT)
         .map(|i| {
             if state_next.start == i as u32 {
                 val_current = state_next.value;

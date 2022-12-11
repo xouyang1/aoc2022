@@ -53,4 +53,6 @@ pub fn get_input(file: &str) -> InputType {
             Some(*state)
         })
         .collect::<Vec<CycleState>>()
+
+    // if space is not a concern, better to store full cycle sequence of register values
 }
