@@ -14,3 +14,5 @@ https://adventofcode.com/2022
 | 6 | <1ms | 1ms |  2ms | Sliding Window | Data Structures: `std::collections::{HashMap, hash_map::Entry}`, <br/> Iterators: `std::iter::Inspect`, `std::str::CharIndices` |
 | 7 | 2ms | <1ms |  2ms | Tree | enum with tuple/structs and match with destructuring |
 | 8 | 1ms | 5ms |  15ms | DP | |
+| 9 | <1ms | 6ms |  8ms |  | Data Structures: `std::cell::Cell`, <br/> Iterators: `std::slice::Windows`, `itertools::fold_while` (Iterator Method) |
+| 10 | <1ms | <<1ms |  <1ms | | Iterators: `std::iter::Scan`, `itertools::structs::Chunks` |

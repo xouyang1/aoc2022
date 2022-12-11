@@ -37,14 +37,7 @@ mod part1 {
             row.iter().rev().enumerate().for_each(|(icol, &val)| {
                 let r = m - 1 - irow;
                 let c = n - 1 - icol;
-                update_peak(
-                    r,
-                    c,
-                    val as i32,
-                    visible,
-                    &mut peak_vertical,
-                    &mut right,
-                );
+                update_peak(r, c, val as i32, visible, &mut peak_vertical, &mut right);
                 if visible[r][c] {
                     count += 1;
                 }
