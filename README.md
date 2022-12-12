@@ -17,3 +17,4 @@ https://adventofcode.com/2022
 | 9 | <1ms | 6ms |  8ms |  | Data Structures: `std::cell::Cell`, <br/> Iterators: `std::slice::Windows`, `itertools::fold_while` (Iterator Method) |
 | 10 | <1ms | <<1ms |  <1ms | | Iterators: `std::iter::{Scan, Skip, StepBy}`, `itertools::structs::Chunks` |
 | 11 | <1ms | 1ms |  350ms | | |
+| 12 | <1ms | 4ms |  5ms | Shortest Path | Data Structures: `std::collections::VecDeque` |
